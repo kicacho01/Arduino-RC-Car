@@ -15,12 +15,12 @@
 #define Speed 180 // Range from 0 to 255, 0 is off throttle while 255 represents full throttle
 
 // Creating a AF_DCMotor object for each motor 
-// first_motor uses terminal 3, motor second_motor uses terminal 4
-// third_motor uses terminal 1, and fifth_motor uses terminal 2
-AF_DCMotor first_motor(3);
-AF_DCMotor second_motor(4);
-AF_DCMotor third_motor(1);
-AF_DCMotor fourth_motor(2);
+// first_motor uses terminal/channel 1, motor second_motor uses terminal/channel 2
+// third_motor uses terminal/channel 3, and fourth_motor uses terminal/channel 4
+AF_DCMotor first_motor(1);
+AF_DCMotor second_motor(2);
+AF_DCMotor third_motor(3);
+AF_DCMotor fourth_motor(4);
 
 void setup() {
   // put your setup code here, to run once:
@@ -54,28 +54,30 @@ void loop() {
 
   // Checking values 
   // The car moves depending on the analog values that are inputted on the joystick
-  if (X >= 800) { // if X >= 800, the car moves forwards
-
+  if (X >= 800) { // if X >= 800, the car moves forwards from my perspective as the person
+                  // controlling the joystick
+                  
     first_motor.run(BACKWARD);
     second_motor.run(BACKWARD);
     third_motor.run(BACKWARD);
     fourth_motor.run(BACKWARD);
 
-  } else if ( X <= 200) {   // if X <= 200, the car moves backwards
+  } else if ( X <= 200) {   // if X <= 200, the car moves backwards from my perspective as the person
+                  // controlling the joystick
 
     first_motor.run(FORWARD);
     second_motor.run(FORWARD);
     third_motor.run(FORWARD);
     fourth_motor.run(FORWARD);
 
-  } else if (Y >= 800) {   // if Y >= 800, the car will turn left
+  } else if (Y >= 800) {   // if Y >= 800, the car will turn left from my perspective
 
     first_motor.run(FORWARD);
     second_motor.run(BACKWARD);
     third_motor.run(FORWARD);
     fourth_motor.run(BACKWARD);
 
-  } else if (Y <= 200) {  // if Y <= 200, the car will turn right
+  } else if (Y <= 200) {  // if Y <= 200, the car will turn right from my perspective
 
     first_motor.run(BACKWARD);
     second_motor.run(FORWARD);
@@ -83,7 +85,6 @@ void loop() {
     fourth_motor.run(FORWARD);
 
   } else {  // When we are not turning the joystick in any direction
-
     first_motor.run(RELEASE);
     second_motor.run(RELEASE);
     third_motor.run(RELEASE);
